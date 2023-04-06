@@ -5,7 +5,7 @@
 typedef struct {
 
 	char is;
-	int nr_mat;
+	int nrMat;
 	char nume[30];
 	int grupa;
 	char an;
@@ -13,9 +13,9 @@ typedef struct {
 	struct{
 		char curs;
 		char seminar;
-	}abs[5];
+	}absente[14];
 
-}STUDENT;
+}student;
 
 int nr_art(FILE *bin, long l){
 
@@ -29,41 +29,41 @@ int nr_art(FILE *bin, long l){
 	return n;
 }
 
-void text(const char* numeBin, const char* numeText) {
+void text(const char* numebin, const char* numetext) {
 
 	FILE *g, *f;
-	STUDENT x;
+	student x;
 
 	g = NULL;
 
-	f = fopen(numeBin, "rb");
+	f = fopen(numebin, "rb");
 
 	if (!f) {
 		printf("ERR");
 	}
 	else {
 
-		g = fopen(numeText, "w");
+		g = fopen(numetext, "w");
 		
 		printf("Good");
 
 		fprintf(g, "Nr matricol    Nume    Grupa   An              Absente\n", "");
 
-		fread(&x, sizeof(STUDENT), 1, f);
+		fread(&x, sizeof(student), 1, f);
 
 		while (!feof(f)) {
 
 			if (x.is == 1)
 			{
-				fprintf(g, "\n%10d %17s %10d %4d", x.nr_mat, x.nume, x.grupa, x.an);
+				fprintf(g, "\n%10d %17s %10d %4d", x.nrMat, x.nume, x.grupa, x.an);
 
-				for (int i = 0; i < 5; i++)
+				for (int i = 0; i < 14; i++)
 				{
-					fprintf(g, "%d %d ", x.abs[i].curs, x.abs[i].seminar);
+					fprintf(g, "%d %d ", x.absente[i].curs, x.absente[i].seminar);
 				}
 
 			}
-			fread(&x, sizeof(STUDENT), 1, f);
+			fread(&x, sizeof(student), 1, f);
 		}
 
 
