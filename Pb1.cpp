@@ -32,7 +32,7 @@ int nr_art(FILE *bin, long l){
 void text(const char* numebin, const char* numetext) {
 
 	FILE *g, *f;
-	student x;
+	student s;
 
 	g = NULL;
 
@@ -49,21 +49,21 @@ void text(const char* numebin, const char* numetext) {
 
 		fprintf(g, "Nr matricol    Nume    Grupa   An              Absente\n", "");
 
-		fread(&x, sizeof(student), 1, f);
+		fread(&s, sizeof(student), 1, f);
 
 		while (!feof(f)) {
 
-			if (x.is == 1)
+			if (s.is == 1)
 			{
-				fprintf(g, "\n%10d %17s %10d %4d", x.nrMat, x.nume, x.grupa, x.an);
+				fprintf(g, "\n%10d %17s %10d %4d", s.nrMat, s.nume, s.grupa, s.an);
 
 				for (int i = 0; i < 14; i++)
 				{
-					fprintf(g, "%d %d ", x.absente[i].curs, x.absente[i].seminar);
+					fprintf(g, "%d %d ", s.absente[i].curs, s.absente[i].seminar);
 				}
 
 			}
-			fread(&x, sizeof(student), 1, f);
+			fread(&s, sizeof(student), 1, f);
 		}
 
 
